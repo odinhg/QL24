@@ -1,0 +1,502 @@
+% https://github.com/martinhelso/UiB
+
+
+\documentclass[UKenglish]{beamer}
+
+\usetheme{UiB}
+
+
+\usepackage[utf8]{inputenx} % For æ, ø, å
+\usepackage{csquotes}       % Quotation marks
+\usepackage{microtype}      % Improved typography
+\usepackage{amssymb}        % Mathematical symbols
+\usepackage{mathtools}      % Mathematical symbols
+\usepackage[absolute, overlay]{textpos} % Arbitrary placement
+\setlength{\TPHorizModule}{\paperwidth} % Textpos units
+\setlength{\TPVertModule}{\paperheight} % Textpos units
+\usepackage{tikz}
+\usetikzlibrary{overlay-beamer-styles}  % Overlay effects for TikZ
+\usepackage{array}
+\usepackage{diagbox}
+\usepackage{booktabs}
+\usepackage{svg}
+\usepackage{xcolor,colortbl}
+
+
+% Redefine `\rowcolor` to allow a beamer overlay specifier
+% New syntax: \rewcolor<overlay>[color model]{color}[left overhang][right overhang]
+\makeatletter
+% Open `\noalign` and check for overlay specification:
+\def\rowcolor{\noalign{\ifnum0=`}\fi\bmr@rowcolor}
+\newcommand<>{\bmr@rowcolor}{%
+	\alt#1%
+	{\global\let\CT@do@color\CT@@do@color\@ifnextchar[\CT@rowa\CT@rowb}% Rest of original `\rowcolor`
+	{\ifnum0=`{\fi}\@gooble@rowcolor}% End `\noalign` and gobble all arguments of `\rowcolor`.
+}
+% Gobble all normal arguments of `\rowcolor`:
+\newcommand{\@gooble@rowcolor}[2][]{\@gooble@rowcolor@}
+\newcommand{\@gooble@rowcolor@}[1][]{\@gooble@rowcolor@@}
+\newcommand{\@gooble@rowcolor@@}[1][]{\ignorespaces}
+\makeatother
+
+
+\author{Odin Hoff Gardå}
+\title{Q-læring}
+\subtitle{INF100}
+
+
+\begin{document}
+
+\begin{frame}{Plan}
+
+\vspace{4em}
+
+\begin{enumerate}
+	\setlength\itemsep{4em}
+	\item \Large Kort introduksjon til Q-læring.
+	\item \Large Workshop: Implementer Q-læring for å løse en labyrint.
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}{Forsterkende Læring\footnote{Engelsk: Reinforcement Learning}}
+
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{itemize}
+			\setlength\itemsep{2.5em}
+			\item Vi har en \textbf{agent} som \textbf{handler} i et \textbf{miljø}.
+			\item Agenten lærer gjennom \textbf{belønning} basert på \textbf{tilstand} og \textbf{handling}.
+			\item \textbf{Q-læring} er en form for forsterkende læring.
+		\end{itemize}
+	\end{column}
+	\begin{column}{0.5\textwidth}  %%<--- here
+		\begin{center}
+\includesvg[width=\textwidth]{figs/Reinforcement_learning_diagram}
+		\end{center}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Q-læring: Oppsett}
+	\begin{itemize}
+		\setlength\itemsep{0.75em}
+		\item Vi starter med:
+		\begin{itemize}
+			\setlength\itemsep{0.625em}
+			\item En mengde $\mathcal{S}$ av mulige \textbf{tilstander}
+			\item En mengde $\mathcal{A}$ av mulige \textbf{handlinger}
+			\item Et par $(s, a)\in \mathcal{S}\times\mathcal{A}$ kalles et \textbf{tilstand-handlings-par}
+			\item En \textbf{belønningsfunksjon} $R\colon\mathcal{S}\times\mathcal{A}\to\mathbb{R}$
+		\end{itemize}
+	\pause
+	
+	
+	\item Ved å la agenten utforske miljøet ønsker vi å lære \textbf{Q-funksjonen} $$Q\colon\mathcal{S}\times\mathcal{A}\to\mathbb{R}$$ som gir oss en \textbf{Q-verdi} $Q(s,a)$ til hvert par $(s,a)\in\mathcal{S}\times\mathcal{A}$.
+	
+	\pause
+	
+	\item \textbf{Endelig mål:} For en $s\in\mathcal{S}$ så ønsker vi at $\arg\max_{a\in\mathcal{A}}Q(s,a)$ er den optimale handlingen for å maksimere forventet belønning.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Gjennomgående Eksempel: $3\times3$ Labyrint}
+	%Enkelt eksempel fordi:
+	%\begin{itemize}
+	%	\item Diskret tid
+	%	\item Statisk miljø (labyrinten endrer seg ikke)
+	%	\item Få tilstander og handlinger (mengden $\mathcal{S}\times\mathcal{A}$ har få elementer)
+	%\end{itemize}
+	
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+			\includesvg[width=0.6\textwidth]{figs/maze_1_with_coords.svg}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}%%<--- here
+			\begin{table}[!hbt]
+				\centering
+				\begin{tabular}{m{1cm} m{2cm}}
+				\includesvg[width=0.125\textwidth]{figs/open_tile} & Åpen rute\\
+				\includesvg[width=0.125\textwidth]{figs/wall_tile} &  Vegg \\ 
+				\includesvg[width=0.125\textwidth]{figs/agent_tile} & Agent\\
+				\includesvg[width=0.125\textwidth]{figs/goal_tile} & Mål\\
+				\end{tabular}
+			\end{table}
+		\end{column}
+	\end{columns}
+	
+	\vspace{1em}
+	
+	\only<2>{
+	\textbf{Læringsmål for agenten:} Fra en vilkårlig åpen rute, nå mål ved å bruke så få steg som mulig.
+	}
+	
+	
+	\only<3-4>{
+	Mulige tilstander (agentens posisjon):
+	$$\mathcal{S} =\lbrace (0,0), (1,0), (2,0), \textcolor{gray}{(0,1)}, (1,1), \textcolor{gray}{(2,1)}, (0,2), (1,2), \textcolor{gray}{(2,2)}\rbrace$$
+	}
+	
+	\only<4>{
+	Mulige handlinger (retninger å gå):
+	$$\mathcal{A} = \{\text{venstre}, \text{høyre}, \text{opp}, \text{ned}\}$$
+	}
+	
+	\only<5>{
+	Noen eksempler på par $(s,a)\in\mathcal{S}\times\mathcal{A}$:
+	\vspace{-1em}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+			\item $((1,2), \text{opp})$
+			\item $((1,2), \text{høyre})$
+			\item $((0,0), \text{ned})$
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}%%<--- here
+			\begin{itemize}
+				\item $((1,1), \text{venstre})$
+				\item $((0,2), \text{opp})$
+				\item $((1,1), \text{ned})$
+			\end{itemize}
+		\end{column}
+	\end{columns}
+	}
+\end{frame}
+
+\begin{frame}{Eksempel: Belønningsfunksjonen}
+	La $s'$ være ruten i retning $a$ fra posisjon $s$.
+	
+	\vspace{1em}
+	
+	Definer belønningsfunksjonen $R\colon\mathcal{S}\times\mathcal{A}\to\mathbb{R}$ ved
+	$$
+	R(s,a) = \begin{cases}
+		-1.0 & \text{hvis } s'\text{ er en veggrute},\\
+		-0.1 & \text{hvis } s'\text{ er en åpen rute og }\\
+		1.0 & \text{hvis } s'\text{ er målruten}.
+	\end{cases}
+	$$
+	\begin{columns}
+	\begin{column}{0.3\textwidth}
+		\begin{center}
+			\includesvg[width=\textwidth]{figs/maze_1_with_coords_no_agent.svg}
+		\end{center}
+	\end{column}
+	\begin{column}{0.7\textwidth}%%<--- here
+	\begin{itemize}
+		\item<1-> \textcolor<3->{gray}{\textbf{Q:} Hva er $R((1,0), \text{høyre})$?}
+		\item<2-> \textcolor<3->{gray}{\textbf{A:} $R((1,0), \text{høyre}) = 1.0$}
+		\item<3-> \textcolor<5->{gray}{\textbf{Q:} Hva er $R((1,1), \text{venstre})$?}
+		\item<4-> \textcolor<5->{gray}{\textbf{A:} $R((1,1), \text{venstre}) = -1.0$}
+		\item<5->\textbf{Q:} Hva er $R((1,1), \text{opp})$?
+		\item<6->\textbf{A:} $R((1,1), \text{opp}) = -0.1$
+	\end{itemize}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Q-tabell}
+	Hvis vi har endelig mange tilstander og handlinger, kan vi representere Q-funksjonen $Q\colon\mathcal{S}\times\mathcal{A}\to\mathbb{R}$ som en tabell (\textbf{Q-tabell}):
+	\begin{columns}
+	\begin{column}{0.5\textwidth}
+	\begin{table}[!hbt]
+	\centering
+	\def\arraystretch{1.1}
+	\setlength\tabcolsep{0.01\textwidth}
+	\begin{tabular}{|c|c|c|c|c|}\hline
+			\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & \only<1-2>{\cellcolor{orange!25}} $\textbf{høyre}$ & $\textbf{opp}$ & \only<3-4>{\cellcolor{orange!25}} $\textbf{ned}$\\ \hline
+			\only<1-2>{\cellcolor{orange!25}}$(0,0)$ & 1.0 & \only<2>{\cellcolor{orange!75}}-0.5 & 0.1 & -0.3 \\ \hline
+			$(1,0)$ & 0.2 & -0.3 & -1.0 & 0.6 \\ \hline
+			$(2,0)$ & -0.4 & -0.1 & 0.3 & 0.7 \\ \hline
+			$(0,1)$ & 0.4 & -0.9 & 1.0 & 0.2 \\ \hline
+		 	\only<3-4>{\cellcolor{orange!25}}$(1,1)$ & 0.6 & -0.1 & 0.4 & \only<4>{\cellcolor{orange!75}}0.8 \\ \hline
+			$(2,1)$ & 1.0 & 0.5 & 0.8 & -0.5 \\ \hline
+			$(0,2)$ & -0.2 & 0.5 & -0.3 & -0.7 \\ \hline
+			\rowcolor<5-6>{orange!25}$(1,2)$ & \only<6>{\cellcolor{orange!75}}0.7 & -1.0 & 0.1 & -0.5 \\ \hline
+			\rowcolor<7-8>{orange!25}$(2,2)$ & 0.1 & 0.0 & \only<8>{\cellcolor{orange!75}}0.8 & 0.1 \\ \hline
+	\end{tabular}
+	\end{table}
+	\end{column}
+	\begin{column}{0.5\textwidth}%%<--- here
+	
+	\textbf{Spørsmål:}
+	
+	\begin{itemize}
+	\item<1->\textcolor<3->{gray}{\textbf{Q:} Hva er $Q((0,0), \text{høyre})$?}
+	\item<2->\textcolor<3->{gray}{\textbf{A:} $-0.5$}
+	\item<3->\textcolor<5->{gray}{\textbf{Q:} Hva er $Q((1,1), \text{ned})$?}
+	\item<4->\textcolor<5->{gray}{\textbf{A:} $0.8$}
+	\item<5->\textcolor<7->{gray}{\textbf{Q:} Hva er $\max_{a\in\mathcal{A}}Q(s,a)$ når $s=(1,2)$?}
+	\item<6->\textcolor<7->{gray}{\textbf{A:} $0.7$}
+	\item<7->\textbf{Q:} Hva er $\max_{a\in\mathcal{A}}Q(s,a)$ når $s=(2,2)$?
+	\item<8->\textbf{A:} $0.8$
+	\end{itemize}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Eksempel: Handling basert på Q-tabell}
+	La $\pi^*\colon\mathcal{S}\to\mathcal{A}$ være funksjonen gitt ved $\pi^*(s) = \arg\max_{a\in\mathcal{A}}Q(s,a)$.
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{table}[!hbt]
+				\centering
+				\def\arraystretch{1.1}
+				\setlength\tabcolsep{0.01\textwidth}
+				\begin{tabular}{|c|c|c|c|c|}\hline
+					\diagbox{$\textbf{s}$}{$\textbf{a}$} & \only<4>{\cellcolor{orange!75}} $\textbf{venstre}$ & \only<6>{\cellcolor{orange!75}} $\textbf{høyre}$ & \only<2>{\cellcolor{orange!75}} $\textbf{opp}$ & $\textbf{ned}$\\ \hline
+					$(0,0)$ & 1.0 & -0.5 & 0.1 & -0.3 \\ \hline
+					$(1,0)$ & 0.2 & -0.3 & -1.0 & 0.6 \\ \hline
+					$(2,0)$ & -0.4 & -0.1 & 0.3 & 0.7 \\ \hline
+					\rowcolor<1-2>{orange!35}$(0,1)$ & 0.4 & -0.9 & \only<2>{\cellcolor{orange!75}}1.0 & 0.2 \\ \hline
+					$(1,1)$ & 0.6 & -0.1 & 0.4 & 0.8 \\ \hline
+					\rowcolor<3-4>{orange!35}$(2,1)$ & \only<4>{\cellcolor{orange!75}}1.0 & 0.5 & 0.8 & -0.5 \\ \hline
+					\rowcolor<5-6>{orange!35}$(0,2)$ & -0.2 & \only<6>{\cellcolor{orange!75}}0.5 & -0.3 & -0.7 \\ \hline
+					$(1,2)$ & 0.7 & -1.0 & 0.1 & -0.5 \\ \hline
+					$(2,2)$ & 0.1 & 0.0 & 0.8 & 0.1 \\ \hline
+				\end{tabular}
+			\end{table}
+		\end{column}
+		\begin{column}{0.5\textwidth}%%<--- here
+			
+			\textbf{Spørsmål:}
+					
+			\begin{itemize}
+			\item<1->\textcolor<3->{gray}{\textbf{Q:} Hva er $\pi^*((0,1))$?}
+			\item<2->\textcolor<3->{gray}{\textbf{A:} $\text{opp}$}
+			\item<3->\textcolor<5->{gray}{\textbf{Q:} Hva er $\pi^*((2,1))$?}
+			\item<4->\textcolor<5->{gray}{\textbf{A:} $\text{venstre}$}
+			\item<5->\textbf{Q:} Hva er $\pi^*((0,2))$?
+			\item<6->\textbf{A:} $\text{høyre}$
+			%\item\textbf{Q:} Hva er $\pi^*((1,1))$?
+			%\item\textbf{A:} $\text{ned}$
+			\end{itemize}	
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\hidelogo
+\begin{frame}{Hvordan lære Q-funksjonen?}
+	Vi starter med $Q(s,a)=0$ for alle par $(s,a)\in\mathcal{S}\times\mathcal{A}$. (En Q-tabell hvor alle verdiene er $0$.)
+	
+	\vspace{1em}
+	
+	\pause
+	
+	Vi har to \textbf{læringsparametere} (begge tall mellom $0$ og $1$):
+	\begin{itemize}
+		\item $\alpha$: \textbf{læringsrate} (learning rate) og
+		\item $\gamma$: \textbf{rabattfaktor} (discount factor).
+	\end{itemize}
+	
+	\pause
+	
+	\vspace{1em}
+	\textbf{Q-læringsalgoritmen (én episode):}
+	
+	\begin{enumerate}
+		\item Vi er i tilstanden $s_t$ ved tid $t$. Velg en handling $a_t$. Ved å utføre $a_t$ i tilstand $s_t$ ender vi opp i tilstand $s_{t+1}$.
+		
+		\pause
+		
+		\item Vi oppdaterer Q-verdien $Q(s_t,a_t)$ med følgende regel:
+		$$
+		Q(s_t, a_t)\leftarrow(1-\alpha)Q(s_t, a_t)+\alpha\left(R(s_t, a_t)+\gamma\max_{a\in\mathcal{A}} Q(s_{t+1}, a)\right).
+		$$
+		
+		\pause
+		
+		\item Gjenta fra steg 1 med $s_{t+1}$ (stopp hvis $s_{t+1}$ er en terminaltilstand).
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Oppdatering av Q-funksjonen}
+	$$
+	(1-\alpha)\underbracket{Q(s_t, a_t)}_{\text{nåværende Q-verdi}}+\,\alpha\left(\overbracket{R(s_t, a_t)}^{\substack{\text{Umiddelbar}\\\text{ belønning}}}+\gamma\underbracket{\max_{a\in\mathcal{A}} Q(s_{t+1}, a)}_{\substack{\text{estimert høyeste}\\ \text{fremtidig belønning}}}\right).
+	$$
+	\begin{itemize}
+		\setlength\itemsep{2em}
+		\item Gammel og ny erfaring kombineres ($\alpha$ bestemmer balansen).
+		\item Belønningen for å utføre $a_t$ i tilstand $s_t$ påvirker den nye Q-verdien.
+		\item Hvor mye vi bryr oss om fremtiden bestemmes av $\gamma$.
+		%\item Summanden $\gamma\max_{a\in\mathcal{A}} Q(s_{t+1}, a)$ tillater mellomflyt av informasjon mellom forskjellige tilstander.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{$\epsilon$-grådig Q-læring: Hvordan velge $a_t$?}
+	\vspace{1em}
+	La $\epsilon$ være et tall mellom $0$ og $1$. I tilstand $s_t$, velg $a_t$ på følgende måte:
+	
+	\vspace{1em}
+	
+	\begin{enumerate}
+		\setlength\itemsep{2em}
+		\item Med sannsynlighet $\epsilon$, velg $a_t$ tilfeldig.
+		\item Med sannsynlighet $1-\epsilon$, velg $a_t=\pi^*(s_t)=\arg\max_{a\in\mathcal{A}}Q(s_t,a)$.
+	\end{enumerate}
+	
+	\vspace{1em}
+	
+	
+	Vi reduserer vanligvis verdien av $\epsilon$ gjennom læringen slik at agenten utforsker mest i starten men gradvis baserer valgene på lært kunnskap.
+	
+\end{frame}
+
+
+\begin{frame}{Eksempel: Læringsteg 1}
+	Sett $\alpha=0.8$ og $\gamma=0.5$. La $s_t=(1,2)$ og $a_t=\text{opp}$.
+	\vspace{-1em}
+	\begin{columns}
+	\begin{column}{0.4\textwidth}
+	\begin{center}
+	\includesvg[width=0.8\textwidth]{figs/maze_1_with_coords_go_up.svg}
+	\end{center}
+	\end{column}
+	\begin{column}{0.6\textwidth}%%<--- here
+	\begin{table}[!hbt]
+		\centering
+		\def\arraystretch{1.0}
+		\setlength\tabcolsep{0.01\textwidth}
+		\begin{tabular}{|c|c|c|c|c|}\hline
+			\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
+			\multicolumn{5}{|c|}{\vdots} \\ \hline
+			$(1,0)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
+			$(1,1)$ & -0.6 & -0.8 & 0.9 & 0.2 \\ \hline
+			\rowcolor{orange!35}$(1,2)$ & -0.4 & -1.0 & \cellcolor{orange!70}0.3 & -0.9 \\ \hline
+			\multicolumn{5}{|c|}{\vdots}\\ \hline
+		\end{tabular}
+	\end{table}
+	\end{column}
+	\end{columns}		
+	$$
+	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{0.3}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{-0.1}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(1,1)}, a)}_{0.9}\right).
+	$$
+	Ny Q-verdi: $Q((1,2), \text{opp})=0.2\cdot0.3+0.8(-0.1+0.5\cdot0.9)=\textbf{0.34}$
+\end{frame}
+
+\begin{frame}{Eksempel: Læringsteg 2}
+	Nå er $s_t=(1,1)$. La $a_t=\text{venstre}$.
+	\vspace{-1em}
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			\begin{center}
+				\includesvg[width=0.8\textwidth]{figs/maze_2_with_coords_go_left.svg}
+			\end{center}
+		\end{column}
+		\begin{column}{0.6\textwidth}%%<--- here
+			\begin{table}[!hbt]
+				\centering
+				\def\arraystretch{1.0}
+				\setlength\tabcolsep{0.01\textwidth}
+				\begin{tabular}{|c|c|c|c|c|}\hline
+					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
+					\multicolumn{5}{|c|}{\vdots} \\ \hline
+					$(1,0)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
+					\rowcolor{orange!35}$(1,1)$ & \cellcolor{orange!70}-0.6 & -0.8 & 0.9 & 0.2 \\ \hline
+					$(1,2)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
+					\multicolumn{5}{|c|}{\vdots}\\ \hline
+				\end{tabular}
+			\end{table}
+		\end{column}
+	\end{columns}		
+	$$
+	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{-0.6}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{-1.0}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(1,1)}, a)}_{0.9}\right).
+	$$
+	Ny Q-verdi: $Q((1,1), \text{venstre})=\textbf{-0.56}$
+\end{frame}
+
+\begin{frame}{Eksempel: Læringsteg 3}
+	Nå er $s_t=(1,1)$. La $a_t:=\pi^*(s_t)=\text{opp}$.
+	\vspace{-1em}
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			\begin{center}
+				\includesvg[width=0.8\textwidth]{figs/maze_2_with_coords_go_up.svg}
+			\end{center}
+		\end{column}
+		\begin{column}{0.6\textwidth}%%<--- here
+			\begin{table}[!hbt]
+				\centering
+				\def\arraystretch{1.0}
+				\setlength\tabcolsep{0.01\textwidth}
+				\begin{tabular}{|c|c|c|c|c|}\hline
+					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
+					\multicolumn{5}{|c|}{\vdots} \\ \hline
+					$(1,0)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
+					\rowcolor{orange!35}$(1,1)$ & \textit{-0.56} & -0.8 & \cellcolor{orange!70}0.9 & 0.2 \\ \hline
+					$(1,2)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
+					\multicolumn{5}{|c|}{\vdots}\\ \hline
+				\end{tabular}
+			\end{table}
+		\end{column}
+	\end{columns}		
+	$$
+	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{0.9}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{-0.1}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(1,0)}, a)}_{1.0}\right).
+	$$
+	Ny Q-verdi: $Q((1,1), \text{opp})=\textbf{0.5}$
+\end{frame}
+
+\begin{frame}{Eksempel: Læringsteg 4}
+	Nå er $s_t=(1,0)$. La $a_t:=\pi^*(s_t)=\text{høyre}$.
+	\vspace{-1em}
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			\begin{center}
+				\includesvg[width=0.8\textwidth]{figs/maze_3_with_coords_go_right.svg}
+			\end{center}
+		\end{column}
+		\begin{column}{0.6\textwidth}%%<--- here
+			\begin{table}[!hbt]
+				\centering
+				\def\arraystretch{1.0}
+				\setlength\tabcolsep{0.01\textwidth}
+				\begin{tabular}{|c|c|c|c|c|}\hline
+					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
+					\multicolumn{5}{|c|}{\vdots} \\ \hline
+					\rowcolor{orange!35}$(1,0)$ & 0.1 & \cellcolor{orange!70}1.0 & -0.8 & 0.2 \\ \hline
+					$(1,1)$ & \textit{-0.56} & -0.8 & \textit{0.5} & 0.2 \\ \hline
+					$(1,2)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
+					\multicolumn{5}{|c|}{\vdots}\\ \hline
+				\end{tabular}
+			\end{table}
+		\end{column}
+	\end{columns}		
+	$$
+	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{1.0}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{1.0}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(2,0)}, a)}_{0.0}\right).
+	$$
+	Ny Q-verdi: $Q((1,0), \text{høyre})=\textbf{1.0}$
+\end{frame}
+
+\begin{frame}{Workshop}
+
+\vspace{1em}
+
+Nå er det din tur til å implementere Q-læring!
+
+\vspace{1em}
+
+\begin{itemize}
+	\setlength\itemsep{1.1em}
+	\item Gå til {\large\url{https://github.com/odinhg/Q-Learning-Tutorial}} (eller skann QR-koden).
+		
+	\begin{center}
+		\includesvg[width=0.25\textwidth]{figs/qr-code.svg}
+	\end{center}
+
+	\item Spør en gruppeleder eller meg dersom du har spørsmål.
+	
+\end{itemize}
+
+
+
+
+\end{frame}
+
+
+
+\end{document}
