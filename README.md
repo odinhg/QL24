@@ -1,8 +1,17 @@
 # Tutorial: Løs labyrint med Q-læring
 
+---
+## TODO
+
+- [ ] Endre fra (col, row) til (row, col) i slides, part 2 og testkoder.
+- [ ] Skrive om part 2 basert på ny part 1
+- [ ] Følge tutorialen
+
+---
+
 Dette er en tutorial lagd for studenter som tar INF100 (Innføring i programmering) våren 2024. Målet vårt er å lage et program der hvor en agent lærer seg å løse en labyrint ved hjelp av Q-læring, en form for forsterkende læring (reinforcement learning).
 
-<!-- &#128210; [Trykk her for å gå til slides.](./slides/main.pdf) -->
+&#128210; [Trykk her for å gå til slides om Q-læring.](./slides/main.pdf)
 
 For å visualisere agenten som handler i miljøet (labyrinten), bruker vi grafikkbiblioteket [`uib_inf100_graphics`](https://github.com/torsteins/uib_inf100_graphics).
 
@@ -18,20 +27,24 @@ Agenten mottar tilbakemelding på sine handlinger via en belønningsfunksjon. Fo
 
 ## Før du starter 
 
-1. Installer grafikkbiblioteket `uib_inf100_graphics` hvis du ikke allerede har det installert. [Trykk her](https://github.com/torsteins/uib_inf100_graphics?tab=readme-ov-file#installation) for instruksjoner.
-2. I en ny mappe, lag tre tomme Python-filer: `main.py`, `learning.py` og `maze.py`.
+For å fullføre denne tutorialen må du først ha gjort del 1 ([Link til del 1](https://inf100.ii.uib.no/lab/8/#tutorial-5-april-labyrint)) hvor du implementerer selve labyrinten og agentens evne til å gå i labyrinten.
 
-Filen `main.py` vil inneholde selve programmet, `learning.py` vil inneholde funksjoner relatert til Q-læring og `maze.py` vil inneholde funksjoner relatert til selve labyrinten (miljøet).
+Du skal med andre ord ha en mappe med følgende filer:
 
----
+```
+laby_main.py
+laby_maze.py
+laby_view.py
+laby_ai.py
+level1.lev
+level2.lev
+```
 
-Tutorialen er delt opp i to deler. I den første delen skal vi lage funksjoner som har med labyrinten å gjøre. I den andre delen skal vi gjøre selve implementasjonen av Q-læringsalgoritmen.
+Når du kjører `laby_main.py` skal labyrinten leses fra en av filene `level*.lev` og du skal kunne flytte agenten rundt med piltastene. Når man trykker `ESC` (escape) så skal agenten flyttes til en tilfeldig åpen rute (rute med verdien `0`).
 
-[Trykk her for å komme til del 1.](./part_1.md)
+[Trykk her for å komme til selve tutorialen](./part_2.md)
 
-[Trykk her for å komme til del 2.](./part_2.md)
-
-Når du er ferdig med begge delene kan du ta en titt på listen nedenfor dersom du ønsker å forbedre programmet ditt.
+Når du er ferdig, kan du ta en titt på listen nedenfor dersom du ønsker å forbedre programmet ditt.
 
 ---
 
@@ -55,8 +68,3 @@ Her er en liste over forslag til mulige forbedringer og eksperimenter du kan vel
 
 ![Animert eksempel som viser en forbedret versjon.](./img/improved_example_animated.gif)
 
----
-
-## Wall of Fame
-
-Skjermbilder av implementasjoner som utmerker seg kommer her etter innleveringsfristen.
