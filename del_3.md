@@ -1,4 +1,4 @@
-# Del 3: Styr hastigheten
+# &#128644; Del 3: Styr hastigheten
 
 Vi skal nå la brukeren endre hastigheten til agenten når automodus er på.
 

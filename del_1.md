@@ -1,4 +1,4 @@
-# Del 1: Før du begynner
+# &#129417; Del 1: Før du begynner
 
 For å fullføre denne tutorialen må du først ha gjort steg 1-7 i del 1 ([link til del 1](https://inf100.ii.uib.no/lab/8/#tutorial-5-april-labyrint)) hvor du implementerte selve labyrinten, grafikken og agentens evne til å bevege seg rundt i labyrinten.
 

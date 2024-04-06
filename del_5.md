@@ -1,4 +1,4 @@
-# Del 5: Implementer belønningsfunksjonen
+# &#127942; Del 5: Implementer belønningsfunksjonen
 
 Vi skal nå implementere belønningsfunksjonen $R\colon\mathcal{S}\times\mathcal{A}\to\mathbb{R}$. Husk, belønningen er bestemt ut i fra agentens posisjon $s\in\mathcal{S}$, retningen $a\in\mathcal{A}$ og hva som skjer når agenten går i retning $a$ fra posisjon $s$.
 

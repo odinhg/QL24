@@ -1,4 +1,4 @@
-# Del 10: Implementer Q-læringsalgoritmen
+# &#129302; Del 10: Implementer Q-læringsalgoritmen
 
 Prøv å kjør programmet du har laget så langt og legg merke til at agenten aldri blir noe flinkere til å finne mål.
 

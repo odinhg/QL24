@@ -1,4 +1,4 @@
-# Del 4: Lag en tom Q-tabell
+# &#128220; Del 4: Lag en tom Q-tabell
 
 Vi skal nå opprette **Q-tabellen** som representerer Q-funksjonen $Q\colon\mathcal{S}\times\mathcal{A}\to\mathbb{R}$. Q-tabellen skal være en 2D-liste av oppslagsverk hvor hvert oppslagsverk har nøkler `"Left"`, `"Right"`, `"Up"` og `"Down"` og aller tilhørende verdier er `0.0`.
 

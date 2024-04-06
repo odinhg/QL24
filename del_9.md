@@ -1,4 +1,4 @@
-# Del 9: $\epsilon$-grådig strategi
+# &#127913; Del 9: $\epsilon$-grådig strategi
 
 ### Del A
 

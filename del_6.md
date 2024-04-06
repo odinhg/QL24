@@ -1,4 +1,4 @@
-# Del 6: Lag variabler
+# &#127381; Del 6: Lag variabler
 
 Vi skal nå opprette noe variabler som vi trenger senere når vi skal implementere Q-læringsalgoritmen.
 

@@ -1,4 +1,4 @@
-# Del 8: Finn retning med høyeste Q-verdi
+# &#128260; Del 8: Finn retning med høyeste Q-verdi
 
 Vi skal nå gjøre *nesten* det samme som i forrige del. Men i stedet for å returnere den høyeste Q-verdien, så skal vi returnere den retningen som gir høyest Q-verdi.
 

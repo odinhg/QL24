@@ -1,4 +1,4 @@
-# Del 2: Resett agenten
+# &#127937; Del 2: Resett agenten
 
 Vi skal nå endre hva som skjer dersom agenten havner på målruten. 
 

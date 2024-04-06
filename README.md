@@ -1,4 +1,4 @@
-# Tutorial: Løs labyrint med Q-læring
+# Tutorial: Løs labyrint med Q-læring &#129302;
 
 Vi skal nå utvide [programmet vårt fra forrige uke](https://inf100.ii.uib.no/lab/8/#tutorial-5-april-labyrint) slik at agenten lærer seg å løse en labyrinten ved hjelp av Q-læring, en form for forsterkende læring (reinforcement learning).
 

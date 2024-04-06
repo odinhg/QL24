@@ -1,4 +1,4 @@
-# Del 7: Finn høyeste Q-verdi i en gitt posisjon
+# &#128200; Del 7: Finn høyeste Q-verdi i en gitt posisjon
 
 Vi skal nå lage en funksjon som gir oss den høyeste Q-verdien som er mulig for agenten å oppnå i en gitt posisjon $s\in\mathcal{S}$.
 
