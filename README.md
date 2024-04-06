@@ -18,18 +18,16 @@ Agenten mottar tilbakemelding på sine handlinger via en belønningsfunksjon. Fo
 
 ### &#128187; Tutorial
 
-1 [Før du begynner (start her)](./del_1.md)
-2 [Resett agenten](./del_2.md)
-3 [Styr hastigheten](./del_3.md)
-4 [Opprett Q-tabell](./del_4.md)
-5 [Belønningsfunksjonen](./del_5.md)
-6 [Lag variabler](./del_6.md)
-7 [Høyeste Q-verdi](./del_7.md)
-8 [Retning med høyeste Q-verdi](./del_8.md)
-9 [ε-grådig strategi](./del_9.md)
-10 [Q-læringsalgoritmen](./del_10.md)
-
-Hvis du trenger hjelp kan du spørre en gruppeleder eller på Discord-serveren for INF100 i kanalen `#q-læring-tutorial`.
+1. [Før du begynner (start her)](./del_1.md)
+2. [Resett agenten](./del_2.md)
+3. [Styr hastigheten](./del_3.md)
+4. [Opprett Q-tabell](./del_4.md)
+5. [Belønningsfunksjonen](./del_5.md)
+6. [Lag variabler](./del_6.md)
+7. [Høyeste Q-verdi](./del_7.md)
+8. [Retning med høyeste Q-verdi](./del_8.md)
+9. [ε-grådig strategi](./del_9.md)
+10. [Q-læringsalgoritmen](./del_10.md)
 
 Når du er ferdig med alle delene, kan du ta en titt på listen nedenfor dersom du ønsker å forbedre programmet ditt.
 
