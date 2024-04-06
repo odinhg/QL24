@@ -16,8 +16,15 @@ For eksempel, hvis `q_table[row][col] = {"Left": 0.3, "Right": 0.4, "Up": 0.2, "
 <details>
   <summary><b>&#128161; Hint</b></summary>
 
-%TODO Skriv hint her om hvordan man bruker `max` med `key`.
+En elegant måte å finne nøkkelen med høyest verdi i et oppslagsverk er å bruke `max` sammen med parameteren `key` og metoden `dict.get`.
 
+For eksempel så vil følgende kodesnutt skrive ut nøkkelen med høyeste verdi i `my_dict` som her er `"b"`:
+
+```python
+my_dict = {"a": 0.2, "b": 0.6, "c": -0.1}
+max_value_key = max(my_dict, key=my_dict.get)
+print(max_value_key)
+```
 
 </details>
 

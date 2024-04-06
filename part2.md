@@ -1,25 +1,3 @@
-## Finn retning med høyeste Q-verdi
-
-Lag en funksjon `get_policy_direction(agent_pos, q_table)` i `laby_ai.py` som tar in to parametere: en tuple av heltall `agent_pos` på formen `(row, col)` som angir agentens posisjon i labyrinten og en 2D-liste av oppslagsverk `q_table`. Returner den retningen/nøkkelen som har høyest verdi i `q_table[row][col]`.
-
-For eksempel, hvis `q_table[row][col] = {"Left": 0.3, "Right": 0.4, "Up": 0.2, "Down": 0.3}` så skal funksjonen returnere `"Right"` siden dette er retningen har høyest verdi.
-
-## $\epsilon$-grådig strategi
-
-### Del A
-
-Modifiser funksjonen `get_direction(app)` i filen `laby_ai.py` som følger:
-
-- Med sannsynlighet $\epsilon$ (`app.epsilon`), bruk `random.choice` til å velge en tilfeldig retning og returner denne.
-- Med sannsynlighet $1-\epsilon$, bruk retningen returnert av funksjonen `get_policy_direction`.
-
-### Del B
-
-1. I funksjonen `init` i filen `laby_ai.py`, opprett opprett variabelen `app.episodes_trained` med verdi `0`.
-2. I funksjonen `timer_fired` i filen `laby_main.py`, øk `app.episodes_trained` med `1` dersom agenten havner i målruten. Oppdater også verdien av `app.epsilon` til `1 / 2 ** (1 + app.epsiodes_trained / 10)`.
-
-Dette gjør at verdien av $\epsilon$ (`app.epsilon`) gradvis minker for hver gang agenten kommer i mål.
-
 ## Implementer Q-læringsalgoritmen
 
 I funksjonen `timer_fired` i filen `laby_main.py` flyttes nå agenten i en tilfeldig retning dersom `app.auto_mode` er `True`. Vi skal nå bruke Q-læring for å gjøre agenten smartere.
