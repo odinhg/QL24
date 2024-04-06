@@ -18,45 +18,28 @@ Agenten mottar tilbakemelding på sine handlinger via en belønningsfunksjon. Fo
 
 ### &#128187; Tutorial
 
-- [1. Før du begynner (start her)](./del_1.md)
-- [2. Resett agenten](./del_2.md)
-- [3. Styr hastigheten](./del_3.md)
-- [4. Opprett Q-tabell](./del_4.md)
-- [5. Belønningsfunksjonen](./del_5.md)
-- [6. Lag variabler](./del_6.md)
-- [7. Høyeste Q-verdi](./del_7.md)
-- [8. Retning med høyeste Q-verdi](./del_8.md)
-- [9. $\epsilon$-grådig strategi](./del_9.md)
-- [10. Q-læringsalgoritmen](./del_10.md)
+1 [Før du begynner (start her)](./del_1.md)
+2 [Resett agenten](./del_2.md)
+3 [Styr hastigheten](./del_3.md)
+4 [Opprett Q-tabell](./del_4.md)
+5 [Belønningsfunksjonen](./del_5.md)
+6 [Lag variabler](./del_6.md)
+7 [Høyeste Q-verdi](./del_7.md)
+8 [Retning med høyeste Q-verdi](./del_8.md)
+9 [ε-grådig strategi](./del_9.md)
+10 [Q-læringsalgoritmen](./del_10.md)
+
+Hvis du trenger hjelp kan du spørre en gruppeleder eller på Discord-serveren for INF100 i kanalen `#q-læring-tutorial`.
+
+Når du er ferdig med alle delene, kan du ta en titt på listen nedenfor dersom du ønsker å forbedre programmet ditt.
 
 ### &#128210; Slides
 
 [Gå til slides om Q-læring.](./slides/main.pdf)
 
-
-
-For å fullføre denne tutorialen må du først ha gjort del 1 ([Link til del 1](https://inf100.ii.uib.no/lab/8/#tutorial-5-april-labyrint)) hvor du implementerer selve labyrinten og agentens evne til å gå i labyrinten.
-
-Du skal med andre ord ha en mappe med følgende filer:
-
-```
-laby_main.py
-laby_maze.py
-laby_view.py
-laby_ai.py
-level1.lev
-level2.lev
-```
-
-Når du kjører `laby_main.py` skal labyrinten leses fra en av filene `level*.lev` og du skal kunne flytte agenten rundt med piltastene. Når man trykker `ESC` (escape) så skal agenten flyttes til en tilfeldig åpen rute (rute med verdien `0`).
-
-[Trykk her for å komme til selve tutorialen](./part_2.md)
-
-Når du er ferdig, kan du ta en titt på listen nedenfor dersom du ønsker å forbedre programmet ditt.
-
 ---
 
-## Utvidelser 
+## Utvidelser
 
 Her er en liste over forslag til mulige forbedringer og eksperimenter du kan velge å implementere:
 
