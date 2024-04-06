@@ -1,19 +1,6 @@
 # Tutorial: Løs labyrint med Q-læring
 
----
-## TODO
-
-- [ ] Endre fra (col, row) til (row, col) i slides, part 2 og testkoder.
-- [ ] Skrive om part 2 basert på ny part 1
-- [ ] Følge tutorialen
-
----
-
-Dette er en tutorial lagd for studenter som tar INF100 (Innføring i programmering) våren 2024. Målet vårt er å lage et program der hvor en agent lærer seg å løse en labyrint ved hjelp av Q-læring, en form for forsterkende læring (reinforcement learning).
-
-&#128210; [Trykk her for å gå til slides om Q-læring.](./slides/main.pdf)
-
-For å visualisere agenten som handler i miljøet (labyrinten), bruker vi grafikkbiblioteket [`uib_inf100_graphics`](https://github.com/torsteins/uib_inf100_graphics).
+Vi skal nå utvide [programmet vårt fra forrige uke](https://inf100.ii.uib.no/lab/8/#tutorial-5-april-labyrint) slik at agenten lærer seg å løse en labyrinten ved hjelp av Q-læring, en form for forsterkende læring (reinforcement learning).
 
 Det ferdige prosjektet kan se noe slikt ut:
 
@@ -25,7 +12,28 @@ Kunnskapen agenten lærer lagres i en såkalt Q-tabell som representerer verdien
 
 Agenten mottar tilbakemelding på sine handlinger via en belønningsfunksjon. For eksempel, å gå inn i veggen gir en sterk negativ belønning. Å nå målruten gir en sterk positiv belønning. Å gå til en ny åpen rute gir en svak negativ belønning (siden vi vil at agenten skal lære seg å finne den raskeste veien til målet).
 
-## Før du starter 
+
+
+## Innhold
+
+### &#128187; Tutorial
+
+- [1. Før du begynner (start her)](./del_1.md)
+- [2. Resett agenten](./del_2.md)
+- [3. Styr hastigheten](./del_3.md)
+- [4. Opprett Q-tabell](./del_4.md)
+- [5. Belønningsfunksjonen](./del_5.md)
+- [6. Lag variabler](./del_6.md)
+- [7. Høyeste Q-verdi](./del_7.md)
+- [8. Retning med høyeste Q-verdi](./del_8.md)
+- [9. $\epsilon$-grådig strategi](./del_9.md)
+- [10. Q-læringsalgoritmen](./del_10.md)
+
+### &#128210; Slides
+
+[Gå til slides om Q-læring.](./slides/main.pdf)
+
+
 
 For å fullføre denne tutorialen må du først ha gjort del 1 ([Link til del 1](https://inf100.ii.uib.no/lab/8/#tutorial-5-april-labyrint)) hvor du implementerer selve labyrinten og agentens evne til å gå i labyrinten.
 
