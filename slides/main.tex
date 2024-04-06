@@ -137,7 +137,7 @@
 	
 	\only<3-4>{
 	Mulige tilstander (agentens posisjon):
-	$$\mathcal{S} =\lbrace (0,0), (1,0), (2,0), \textcolor{gray}{(0,1)}, (1,1), \textcolor{gray}{(2,1)}, (0,2), (1,2), \textcolor{gray}{(2,2)}\rbrace$$
+	$$\mathcal{S} =\lbrace (0,0), (1,0), (2,0), (0,1), (1,1), (2,1), (0,2), (1,2), (2,2)\rbrace$$
 	}
 	
 	\only<4>{
@@ -151,15 +151,15 @@
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-			\item $((1,2), \text{opp})$
-			\item $((1,2), \text{høyre})$
+			\item $((2,1), \text{opp})$
+			\item $((2,1), \text{høyre})$
 			\item $((0,0), \text{ned})$
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.5\textwidth}%%<--- here
 			\begin{itemize}
 				\item $((1,1), \text{venstre})$
-				\item $((0,2), \text{opp})$
+				\item $((2,0), \text{opp})$
 				\item $((1,1), \text{ned})$
 			\end{itemize}
 		\end{column}
@@ -188,8 +188,8 @@
 	\end{column}
 	\begin{column}{0.7\textwidth}%%<--- here
 	\begin{itemize}
-		\item<1-> \textcolor<3->{gray}{\textbf{Q:} Hva er $R((1,0), \text{høyre})$?}
-		\item<2-> \textcolor<3->{gray}{\textbf{A:} $R((1,0), \text{høyre}) = 1.0$}
+		\item<1-> \textcolor<3->{gray}{\textbf{Q:} Hva er $R((0,1), \text{høyre})$?}
+		\item<2-> \textcolor<3->{gray}{\textbf{A:} $R((0,1), \text{høyre}) = 1.0$}
 		\item<3-> \textcolor<5->{gray}{\textbf{Q:} Hva er $R((1,1), \text{venstre})$?}
 		\item<4-> \textcolor<5->{gray}{\textbf{A:} $R((1,1), \text{venstre}) = -1.0$}
 		\item<5->\textbf{Q:} Hva er $R((1,1), \text{opp})$?
@@ -349,7 +349,7 @@
 
 
 \begin{frame}{Eksempel: Læringsteg 1}
-	Sett $\alpha=0.8$ og $\gamma=0.5$. La $s_t=(1,2)$ og $a_t=\text{opp}$.
+	Sett $\alpha=0.8$ og $\gamma=0.5$. La $s_t=(2,1)$ og $a_t=\text{opp}$.
 	\vspace{-1em}
 	\begin{columns}
 	\begin{column}{0.4\textwidth}
@@ -365,9 +365,9 @@
 		\begin{tabular}{|c|c|c|c|c|}\hline
 			\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
 			\multicolumn{5}{|c|}{\vdots} \\ \hline
-			$(1,0)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
+			$(0,1)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
 			$(1,1)$ & -0.6 & -0.8 & 0.9 & 0.2 \\ \hline
-			\rowcolor{orange!35}$(1,2)$ & -0.4 & -1.0 & \cellcolor{orange!70}0.3 & -0.9 \\ \hline
+			\rowcolor{orange!35}$(2,1)$ & -0.4 & -1.0 & \cellcolor{orange!70}0.3 & -0.9 \\ \hline
 			\multicolumn{5}{|c|}{\vdots}\\ \hline
 		\end{tabular}
 	\end{table}
@@ -376,7 +376,7 @@
 	$$
 	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{0.3}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{-0.1}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(1,1)}, a)}_{0.9}\right).
 	$$
-	Ny Q-verdi: $Q((1,2), \text{opp})=0.2\cdot0.3+0.8(-0.1+0.5\cdot0.9)=\textbf{0.34}$
+	Ny Q-verdi: $Q((2,1), \text{opp})=0.2\cdot0.3+0.8(-0.1+0.5\cdot0.9)=\textbf{0.34}$
 \end{frame}
 
 \begin{frame}{Eksempel: Læringsteg 2}
@@ -396,9 +396,9 @@
 				\begin{tabular}{|c|c|c|c|c|}\hline
 					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
 					\multicolumn{5}{|c|}{\vdots} \\ \hline
-					$(1,0)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
+					$(0,1)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
 					\rowcolor{orange!35}$(1,1)$ & \cellcolor{orange!70}-0.6 & -0.8 & 0.9 & 0.2 \\ \hline
-					$(1,2)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
+					$(2,1)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
 					\multicolumn{5}{|c|}{\vdots}\\ \hline
 				\end{tabular}
 			\end{table}
@@ -411,7 +411,7 @@
 \end{frame}
 
 \begin{frame}{Eksempel: Læringsteg 3}
-	Nå er $s_t=(1,1)$. La $a_t:=\pi^*(s_t)=\text{opp}$.
+	Vi har fortsatt $s_t=(1,1)$. La $a_t:=\pi^*(s_t)=\text{opp}$.
 	\vspace{-1em}
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
@@ -427,22 +427,22 @@
 				\begin{tabular}{|c|c|c|c|c|}\hline
 					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
 					\multicolumn{5}{|c|}{\vdots} \\ \hline
-					$(1,0)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
+					$(0,1)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
 					\rowcolor{orange!35}$(1,1)$ & \textit{-0.56} & -0.8 & \cellcolor{orange!70}0.9 & 0.2 \\ \hline
-					$(1,2)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
+					$(2,1)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
 					\multicolumn{5}{|c|}{\vdots}\\ \hline
 				\end{tabular}
 			\end{table}
 		\end{column}
 	\end{columns}		
 	$$
-	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{0.9}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{-0.1}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(1,0)}, a)}_{1.0}\right).
+	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{0.9}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{-0.1}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(0,1)}, a)}_{1.0}\right).
 	$$
 	Ny Q-verdi: $Q((1,1), \text{opp})=\textbf{0.5}$
 \end{frame}
 
 \begin{frame}{Eksempel: Læringsteg 4}
-	Nå er $s_t=(1,0)$. La $a_t:=\pi^*(s_t)=\text{høyre}$.
+	Nå er $s_t=(0,1)$. La $a_t:=\pi^*(s_t)=\text{høyre}$.
 	\vspace{-1em}
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
@@ -458,18 +458,18 @@
 				\begin{tabular}{|c|c|c|c|c|}\hline
 					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
 					\multicolumn{5}{|c|}{\vdots} \\ \hline
-					\rowcolor{orange!35}$(1,0)$ & 0.1 & \cellcolor{orange!70}1.0 & -0.8 & 0.2 \\ \hline
+					\rowcolor{orange!35}$(0,1)$ & 0.1 & \cellcolor{orange!70}1.0 & -0.8 & 0.2 \\ \hline
 					$(1,1)$ & \textit{-0.56} & -0.8 & \textit{0.5} & 0.2 \\ \hline
-					$(1,2)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
+					$(2,1)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
 					\multicolumn{5}{|c|}{\vdots}\\ \hline
 				\end{tabular}
 			\end{table}
 		\end{column}
 	\end{columns}		
 	$$
-	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{1.0}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{1.0}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(2,0)}, a)}_{0.0}\right).
+	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{1.0}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{1.0}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(0,2)}, a)}_{0.0}\right).
 	$$
-	Ny Q-verdi: $Q((1,0), \text{høyre})=\textbf{1.0}$
+	Ny Q-verdi: $Q((0,1), \text{høyre})=\textbf{1.0}$
 \end{frame}
 
 \begin{frame}{Workshop}
@@ -482,7 +482,7 @@ Nå er det din tur til å implementere Q-læring!
 
 \begin{itemize}
 	\setlength\itemsep{1.1em}
-	\item Gå til {\large\url{https://github.com/odinhg/Q-Learning-Tutorial}} (eller skann QR-koden).
+	\item Gå til {\large\url{https://github.com/odinhg/QL24}}
 		
 	\begin{center}
 		\includesvg[width=0.25\textwidth]{figs/qr-code.svg}

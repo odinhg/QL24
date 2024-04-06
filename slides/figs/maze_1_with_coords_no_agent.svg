@@ -132,7 +132,7 @@
          id="tspan2-3"
          style="font-size:1.41111px;stroke-width:0.264583"
          x="9.1635494"
-         y="5.5948319">(1,0)</tspan></text>
+         y="5.5948319">(0,1)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:1.25;font-family:sans-serif;fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -141,9 +141,9 @@
        id="text2-9"><tspan
          sodipodi:role="line"
          id="tspan2-1"
-         style="font-size:1.41111px;stroke-width:0.264583;fill:#f9f9f9"
+         style="font-size:1.41111px;fill:#f9f9f9;stroke-width:0.264583"
          x="14.161803"
-         y="5.5948319">(2,0)</tspan></text>
+         y="5.5948319">(0,2)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:1.25;font-family:sans-serif;fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -152,9 +152,9 @@
        id="text2-93"><tspan
          sodipodi:role="line"
          id="tspan2-6"
-         style="font-size:1.41111px;stroke-width:0.264583;fill:#f9f9f9"
+         style="font-size:1.41111px;fill:#f9f9f9;stroke-width:0.264583"
          x="3.9818525"
-         y="10.277759">(0,1)</tspan></text>
+         y="10.277759">(1,0)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -174,9 +174,9 @@
        id="text2-9-2"><tspan
          sodipodi:role="line"
          id="tspan2-1-6"
-         style="font-size:1.41111px;stroke-width:0.264583;fill:#f9f9f9"
+         style="font-size:1.41111px;fill:#f9f9f9;stroke-width:0.264583"
          x="14.161803"
-         y="10.277759">(2,1)</tspan></text>
+         y="10.277759">(1,2)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -187,7 +187,7 @@
          id="tspan2-0"
          style="font-size:1.41111px;stroke-width:0.264583"
          x="3.9818525"
-         y="15.276011">(0,2)</tspan></text>
+         y="15.276011">(2,0)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -198,7 +198,7 @@
          id="tspan2-3-3"
          style="font-size:1.41111px;stroke-width:0.264583"
          x="9.1635494"
-         y="15.276011">(1,2)</tspan></text>
+         y="15.276011">(2,1)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.41111px;line-height:1.25;font-family:sans-serif;fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:0.264583"

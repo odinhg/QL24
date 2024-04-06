@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.3.7)  26 MAR 2024 11:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.3.7)  6 APR 2024 16:25
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -3439,12 +3439,13 @@ ngle page
 Package svg Info: Last page of `./svg-inkscape/qr-code_svg-tex.pdf' is 1 on inp
 ut line 498.
  (./svg-inkscape/qr-code_svg-tex.pdf_tex
-<./svg-inkscape/qr-code_svg-tex.pdf, id=365, page=1, 807.7678pt x 807.7678pt>
+<./svg-inkscape/qr-code_svg-tex.pdf, id=365, page=1, 869.49844pt x 869.49844pt>
+
 File: ./svg-inkscape/qr-code_svg-tex.pdf Graphic file (type pdf)
 <use ./svg-inkscape/qr-code_svg-tex.pdf, page 1>
 Package pdftex.def Info: ./svg-inkscape/qr-code_svg-tex.pdf , page1 used on inp
 ut line 56.
-(pdftex.def)             Requested size: 85.5788pt x 85.57614pt.
+(pdftex.def)             Requested size: 85.5788pt x 85.57512pt.
 )
 Overfull \hbox (1.27199pt too wide) has occurred while \output is active
 [][][] 
@@ -3486,7 +3487,7 @@ pe1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/urw/b
 ookman/ubkl8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></
 usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist
 /fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on main.pdf (43 pages, 286128 bytes).
+Output written on main.pdf (43 pages, 285300 bytes).
 PDF statistics:
  459 PDF objects out of 1000 (max. 8388607)
  320 compressed objects within 4 object streams

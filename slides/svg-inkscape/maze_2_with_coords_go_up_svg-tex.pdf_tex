@@ -55,13 +55,13 @@
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{maze_2_with_coords_go_up_svg-tex.pdf}}%
     \put(0.06740642,0.7806647){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(0,0)\end{tabular}}}}%
-    \put(0.40697252,0.7806647){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(1,0)\end{tabular}}}}%
-    \put(0.73451724,0.7806647){\color[rgb]{0.97647059,0.97647059,0.97647059}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(2,0)\end{tabular}}}}%
-    \put(0.06740644,0.47378395){\color[rgb]{0.97647059,0.97647059,0.97647059}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(0,1)\end{tabular}}}}%
+    \put(0.40697252,0.7806647){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(0,1)\end{tabular}}}}%
+    \put(0.73451724,0.7806647){\color[rgb]{0.97647059,0.97647059,0.97647059}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(0,2)\end{tabular}}}}%
+    \put(0.06740644,0.47378395){\color[rgb]{0.97647059,0.97647059,0.97647059}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(1,0)\end{tabular}}}}%
     \put(0.40697252,0.47378395){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(1,1)\end{tabular}}}}%
-    \put(0.73451724,0.47378395){\color[rgb]{0.97647059,0.97647059,0.97647059}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(2,1)\end{tabular}}}}%
-    \put(0.06740644,0.14623929){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(0,2)\end{tabular}}}}%
-    \put(0.40697252,0.14623929){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(1,2)\end{tabular}}}}%
+    \put(0.73451724,0.47378395){\color[rgb]{0.97647059,0.97647059,0.97647059}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(1,2)\end{tabular}}}}%
+    \put(0.06740644,0.14623929){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(2,0)\end{tabular}}}}%
+    \put(0.40697252,0.14623929){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(2,1)\end{tabular}}}}%
     \put(0.73451724,0.14623929){\color[rgb]{0.97647059,0.97647059,0.97647059}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(2,2)\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{maze_2_with_coords_go_up_svg-tex.pdf}}%
   \end{picture}%
