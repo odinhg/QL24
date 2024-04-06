@@ -1,6 +1,6 @@
 # &#128200; Del 7: Finn høyeste Q-verdi i en gitt posisjon
 
-Vi skal nå lage en funksjon som gir oss den høyeste Q-verdien som er mulig for agenten å oppnå i en gitt posisjon $s\in\mathcal{S}$.
+Vi skal nå lage en funksjon som gir oss den høyeste Q-verdien som er mulig for agenten å oppnå i en gitt posisjon $s\in\mathcal{S}$. Med andre ord, vi skal implementere $\max_{a\in\mathcal{A}}Q(s,a)$.
 
 Lag en funksjon `get_maximum_q_value(agent_pos, q_table)` i `laby_ai.py` som tar in to parametere: 
 

@@ -1,6 +1,6 @@
 # &#127381; Del 6: Lag variabler
 
-Vi skal nå opprette noe variabler som vi trenger senere når vi skal implementere Q-læringsalgoritmen.
+Vi skal nå opprette noen variabler som vi trenger senere.
 
 I funksjonen `init` i filen `laby_ai.py`, opprett følgende tre variabler:
 
@@ -8,7 +8,7 @@ I funksjonen `init` i filen `laby_ai.py`, opprett følgende tre variabler:
 2. Rabattfaktoren $\gamma$: `app.discount_factor` med verdi `0.5` og
 3. Sannsynligheten $\epsilon$: `app.epsilon` med verdi `0.5`.
 
-Verdiene her er basert på prøving og feiling. Du kan eksperimentere med disse verdiene senere når du har fullført alle delene.
+Du kan eksperimentere med disse verdiene senere når du har fullført alle delene.
 
 ---
 
