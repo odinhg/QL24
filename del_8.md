@@ -2,7 +2,7 @@
 
 Vi skal nå gjøre *nesten* det samme som i forrige del. Men i stedet for å returnere den høyeste Q-verdien, så skal vi returnere den retningen som gir høyest Q-verdi.
 
-Med andre ord, vi skal implementere $\pi^*\colon\mathcal{S}\to\mathcal{A}$ fra forelesningen som vi definerte ved $\pi^*(s)=\arg\max_{a\in\mathcal{A}}Q(s,a)$.
+Med andre ord, vi skal implementere $\pi^\*\colon\mathcal{S}\to\mathcal{A}$ fra forelesningen som vi definerte ved $\pi^\*(s)=\arg\max_{a\in\mathcal{A}}Q(s,a)$.
 
 Lag en funksjon `get_policy_direction(agent_pos, q_table)` i `laby_ai.py` som tar in to parametere: 
 
