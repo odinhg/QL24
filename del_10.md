@@ -21,7 +21,7 @@ Dersom du har gjort alt riktig så langt så skal agenten nå lære seg å løse
 
 Et godt tips er å endre funksjonen `draw_maze` i filen `laby_view.py` slik at retningen med høyest Q-verdi for hver rute blir skrevet i midten av ruten. Du kan bruke funksjonen `get_policy_direction` og `app.q_table[row][col]` til å finne retningen. Da vil programmet se noe slikt ut: 
 
-![Eksempel på tekst som viser retning med høyest Q-verdi.](.img/direction_text.png)
+![Eksempel på tekst som viser retning med høyest Q-verdi.](./img/direction_text.png)
 
 Hvis du ikke finner ut av det på egenhånd, spør gjerne en gruppeleder eller bruk Discord-kanalen.
 
